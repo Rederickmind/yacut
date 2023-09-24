@@ -1,9 +1,10 @@
-from datetime import datetime
 import random
+from datetime import datetime
 
 from flask import url_for
 
 from yacut import db
+
 from .constants import GENERATOR_ALPHABET, USER_INPUT_LIMIT
 
 
