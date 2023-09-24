@@ -2,11 +2,12 @@
 {% block content %}
   <main>
     <section class="container my-5 px-4">
-      <h1 class="text-center"><span style="color:red">Ya</span>Cut</h1>
+      <h1 class="text-center">
+        <span style="color:red">Ya</span>Cut
+      </h1>
       <p class="text-center my-4">
         Создайте короткую ссылку автоматически или предложите свой вариант
       </p>
-
       <div class="container">
         <div class="row my-3">
           <div class="col-sm">
@@ -14,7 +15,7 @@
           <div class="col-sm">
             <form method="POST">
               {{ form.csrf_token }}
-              {{ form.title(class="form-control form-control-lg py-3 mb-3", placeholder=form.original_link.label.text) }}
+              {{ form.original_link(class="form-control form-control-lg py-2 mb-3", placeholder=form.original_link.label.text) }}
               <p>
                 {% if form.original_link.errors %}
                   {% for error in errors %}
@@ -37,9 +38,8 @@
           </div>
         </div>
       </div>
-
       <div class="container">
-        <div class="row ">
+        <div class="row">
           <div class="col-sm">
           </div>
           <div class="col-sm">
@@ -70,7 +70,6 @@
           </div>
         </div>
       </div>
-
     </section>
   </main>
 {% endblock content %}
