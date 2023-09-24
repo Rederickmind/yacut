@@ -17,7 +17,8 @@ def index_view():
 
         if URLMap.if_short_link_exists():
             flash(
-                'Ваш вариант короткой ссылки уже занят!'
+                'Ваш вариант короткой ссылки уже занят!',
+                'rejected'
             )
             return render_template('index.html', form=form)
         short_link = URLMap(
@@ -31,7 +32,8 @@ def index_view():
                 'short_link_url',
                 short_link_url=custom_short_link,
                 _external=True
-            )
+            ),
+            'complete_link'
         )
         return render_template('index.html', form=form)
 
