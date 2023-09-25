@@ -37,7 +37,9 @@ class URLMap(db.Model):
                 k=GENERATE_CUSTOM_ID_LIMIT
             )
         )
-        return result_short_link
+        if not self.if_short_link_exists(result_short_link):
+            return result_short_link
+        return self.get_unique_short_id()
 
     def if_short_link_exists(self, short_link):
         return bool(self.query.filter_by(short=short_link).first())
