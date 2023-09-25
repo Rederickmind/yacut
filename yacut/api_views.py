@@ -1,8 +1,3 @@
-"""
-/api/id/ — POST-запрос на создание новой короткой ссылки;
-/api/id/<short_id>/ — GET-запрос на получение оригинальной ссылки по указанному короткому идентификатору.
-"""
-
 from http import HTTPStatus
 
 from flask import jsonify, request
@@ -14,6 +9,7 @@ from .models import URLMap
 
 @app.route('/api/id/', methods=['POST'])
 def add_short_url():
+    '/api/id/ — POST-запрос на создание новой короткой ссылки;'
     data = request.get_json()
     if not data:
         raise InvalidAPIUsage('Отсутствует тело запроса')
@@ -42,6 +38,7 @@ def add_short_url():
 
 @app.route('/api/id/<short_id>/', methods=['GET'])
 def get_original_link(short_id):
+    '/api/id/<short_id>/ — GET-запрос на получение оригинальной ссылки по указанному короткому идентификатору.'
     url_map = URLMap.query.filter_by(short=short_id).first()
     if url_map is not None:
         return jsonify({'url': url_map.original}), HTTPStatus.OK

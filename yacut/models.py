@@ -5,7 +5,11 @@ from flask import url_for
 
 from yacut import db
 
-from .constants import GENERATOR_ALPHABET, USER_INPUT_LIMIT
+from .constants import (
+    GENERATE_CUSTOM_ID_LIMIT,
+    GENERATOR_ALPHABET,
+    USER_CUSTOM_ID_LIMIT
+)
 
 
 class URLMap(db.Model):
@@ -27,15 +31,19 @@ class URLMap(db.Model):
         setattr(self, 'short', data['custom_id'])
 
     def get_unique_short_id(self):
-        alphabet = GENERATOR_ALPHABET
-        result_short_link = ''.join(random.choices(alphabet, k=6))
+        result_short_link = ''.join(
+            random.choices(
+                GENERATOR_ALPHABET,
+                k=GENERATE_CUSTOM_ID_LIMIT
+            )
+        )
         return result_short_link
 
     def if_short_link_exists(self, short_link):
         return bool(self.query.filter_by(short=short_link).first())
 
     def is_valid_short_link(self, short_link):
-        if len(short_link) > USER_INPUT_LIMIT:
+        if len(short_link) > USER_CUSTOM_ID_LIMIT:
             return False
         for value in short_link:
             if value not in GENERATOR_ALPHABET:
